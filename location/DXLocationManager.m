@@ -1,6 +1,6 @@
 //
-//  GetLocation.m
-//  OWS
+//  DXLocationManager.m
+//  Location
 //
 //  Created by Bindx on 9/16/14.
 //  Copyright (c) 2014年 Bindx. All rights reserved.
@@ -14,54 +14,51 @@
 
 static DXLocationManager *sharedLocationManager = nil;
 
-+ (DXLocationManager *)sharedLocationManager;
-{
++ (DXLocationManager *)sharedLocationManager{
     @synchronized(self){
         if(sharedLocationManager == nil){
             sharedLocationManager = [[self alloc] init];
             [sharedLocationManager initRaysource];
             // 开启定位服务
-            [sharedLocationManager getMyLocation];
+            [sharedLocationManager getMyLocationWithDelegate:NO];
         }
     }
     return sharedLocationManager;
-    
 }
 
-- (void)initRaysource
-{
+
+- (void)initRaysource{
     if(_locationManager == nil)
         _locationManager = [[CLLocationManager alloc] init];
     
-    if (![CLLocationManager locationServicesEnabled])
-    {
+    if (![CLLocationManager locationServicesEnabled]){
         self.locationServicesEnabled = NO;
     }
     
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = 10.0f;
+    _locationManager.distanceFilter = 100.0f;
     CGPoint point = CGPointFromString([[NSUserDefaults standardUserDefaults] valueForKey:Location]);
     _curLocation = CLLocationCoordinate2DMake(point.x, point.y);
 }
 
-- (void)getMyLocation
-{
+- (void)getMyLocationWithDelegate:(BOOL)bl{
     self.getLocation = YES;
+    if (!bl) {
+        GetLocationManger.delegate = self;
+    }
     [_locationManager startUpdatingLocation];
 }
 
 + (void)getlocationWithBlock:(CLLocationBlock) block{
-    [GetLocationManger getMyLocation];
+    [GetLocationManger getMyLocationWithDelegate:YES];
     if (block) {
         GetLocationManger.cblock = [block copy];
     }
 }
 
-
 #pragma CLLocationManager delegate method
-- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     self.locationServicesEnabled = YES;
     _curLocation = [newLocation coordinate];
     
@@ -71,55 +68,42 @@ static DXLocationManager *sharedLocationManager = nil;
     [[NSUserDefaults standardUserDefaults] setValue:NSStringFromCGPoint(CGPointMake(_curLocation.latitude, _curLocation.longitude)) forKey:Location];
     
     [manager stopUpdatingLocation];
-    if(self.getLocation)
-    {
+    
+    if(self.getLocation){
         self.getLocation = NO;
-        if([_delegate respondsToSelector:@selector(locationManager:didGetLocation:success:)])
+        if([_delegate respondsToSelector:@selector(locationManager:didGetLocation:success:)]){
             [_delegate locationManager:self didGetLocation:_curLocation success:YES];
+        }
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     self.locationServicesEnabled = NO;
     [manager stopUpdatingLocation];
     
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status)
-    {
-        if([_delegate respondsToSelector:@selector(locationManager:didShowIndelegate:)]&&_delegate)
-        {
+    if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status){
+        if([_delegate respondsToSelector:@selector(locationManager:didShowIndelegate:)]&&_delegate){
             [_delegate locationManager:self didShowIndelegate:@"error"];
         }
     }
     
-    if(self.getLocation)
-    {
+    if(self.getLocation){
         self.getLocation = NO;
         if([_delegate respondsToSelector:@selector(locationManager:didGetLocation:success:)])
             [_delegate locationManager:self didGetLocation:_curLocation success:NO];
     }
 }
 
-- (void)locationManager:(DXLocationManager *)manager didGetLocation:(CLLocationCoordinate2D)coordinate success:(BOOL)success
-{
-    if(success)
-    {
+- (void)locationManager:(DXLocationManager *)manager didGetLocation:(CLLocationCoordinate2D)coordinate success:(BOOL)success{
+    if(success){
         if (_cblock) {
             _cblock(coordinate.longitude,coordinate.latitude);
-        }else{
-//            OWS.longitude = coordinate.longitude;
-//            OWS.latitude  = coordinate.latitude;
-//            GetLocationManger.delegate = nil;
         }
-    }else
-        
+    }else{
         if (_cblock) {
             _cblock(0,0);
-        }else{
-//        OWS.longitude = [@""floatValue];
-//        OWS.latitude  = [@""floatValue];
-//        GetLocationManger.delegate = nil;
+        }
     }
 }
 
