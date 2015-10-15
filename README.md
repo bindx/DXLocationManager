@@ -1,6 +1,11 @@
 # DXLocationManager
 
 
+####使用CocoaPods
+</p>
+
+    pod 'DXLocationManager',:git=>"https://github.com/bindx/DXLocationManager.git"
+
 ##使用方法
 <p></p>
 ######iOS 6 & 7
