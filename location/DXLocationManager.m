@@ -29,14 +29,17 @@ static DXLocationManager *sharedLocationManager = nil;
 
 - (void)initRaysource{
     if(_locationManager == nil)
-        _locationManager = [[CLLocationManager alloc] init];
+//        _locationManager = [[CLLocationManager alloc] init];
+    _locationManager = [[CLLocationManager alloc]init];
+    _locationManager.delegate = self;
+    [_locationManager requestAlwaysAuthorization];
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
     
     if (![CLLocationManager locationServicesEnabled]){
         self.locationServicesEnabled = NO;
     }
     
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.distanceFilter = 100.0f;
     CGPoint point = CGPointFromString([[NSUserDefaults standardUserDefaults] valueForKey:Location]);
     _curLocation = CLLocationCoordinate2DMake(point.x, point.y);

@@ -20,10 +20,16 @@
 }
 
 - (IBAction)getlocation:(UIButton *)sender{
+
+    if (TARGET_IPHONE_SIMULATOR){
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"注意" message:@"请在真机中运行" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
     if (sender.tag == 1) {//Block
         [DXLocationManager getlocationWithBlock:^(double longitude, double latitude) {
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"位置信息" message:[NSString stringWithFormat:@"经度:%f \n纬度:%f",longitude,latitude] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-            NSLog(@"%f",longitude);
             [alert show];
         }];
     }else{//Delegate

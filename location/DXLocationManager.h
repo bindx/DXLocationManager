@@ -38,7 +38,7 @@ typedef void(^CLLocationBlock)(double longitude,double latitude);
 @property(nonatomic,  copy) CLLocationBlock cblock;
 @property(nonatomic,strong) CLLocationManager *locationManager;
 @property(nonatomic,assign) CLLocationCoordinate2D curLocation;
-@property(nonatomic,  weak) id<LocationManagerDelegate>delegate;
+@property(nonatomic,assign) id<LocationManagerDelegate>delegate;
 @property(nonatomic,assign) BOOL getLocation;
 @property(nonatomic,assign) BOOL locationServicesEnabled;
 

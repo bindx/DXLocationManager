@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#if TARGET_IPHONE_SIMULATOR
+#define SIMULATOR 1
+#elif TARGET_OS_IPHONE
+#define TARGET_OS 0
+#endif
+
 @interface ViewController : UIViewController
 
 
