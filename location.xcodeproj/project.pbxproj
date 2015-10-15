@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4BFBCB81BCF966400B2DE21 /* DXLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4BFBCB71BCF966400B2DE21 /* DXLocationManager.m */; };
 		C4EFBB671BC8FE7300E7269A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFBB661BC8FE7300E7269A /* main.m */; };
 		C4EFBB6A1BC8FE7300E7269A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFBB691BC8FE7300E7269A /* AppDelegate.m */; };
 		C4EFBB6D1BC8FE7300E7269A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFBB6C1BC8FE7300E7269A /* ViewController.m */; };
 		C4EFBB701BC8FE7300E7269A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4EFBB6E1BC8FE7300E7269A /* Main.storyboard */; };
 		C4EFBB721BC8FE7300E7269A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4EFBB711BC8FE7300E7269A /* Images.xcassets */; };
 		C4EFBB751BC8FE7300E7269A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4EFBB731BC8FE7300E7269A /* LaunchScreen.xib */; };
-		C4EFBB8C1BC8FE8000E7269A /* DXLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EFBB8B1BC8FE8000E7269A /* DXLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4BFBCB61BCF966400B2DE21 /* DXLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXLocationManager.h; sourceTree = "<group>"; };
+		C4BFBCB71BCF966400B2DE21 /* DXLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXLocationManager.m; sourceTree = "<group>"; };
 		C4EFBB611BC8FE7300E7269A /* location.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = location.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4EFBB651BC8FE7300E7269A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4EFBB661BC8FE7300E7269A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -29,8 +31,6 @@
 		C4EFBB741BC8FE7300E7269A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C4EFBB7F1BC8FE7300E7269A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4EFBB801BC8FE7300E7269A /* locationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = locationTests.m; sourceTree = "<group>"; };
-		C4EFBB8A1BC8FE8000E7269A /* DXLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXLocationManager.h; sourceTree = "<group>"; };
-		C4EFBB8B1BC8FE8000E7269A /* DXLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +44,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C4BFBCB51BCF966400B2DE21 /* DXLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				C4BFBCB61BCF966400B2DE21 /* DXLocationManager.h */,
+				C4BFBCB71BCF966400B2DE21 /* DXLocationManager.m */,
+			);
+			path = DXLocationManager;
+			sourceTree = "<group>";
+		};
 		C4EFBB581BC8FE7300E7269A = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +73,11 @@
 		C4EFBB631BC8FE7300E7269A /* location */ = {
 			isa = PBXGroup;
 			children = (
+				C4BFBCB51BCF966400B2DE21 /* DXLocationManager */,
 				C4EFBB681BC8FE7300E7269A /* AppDelegate.h */,
 				C4EFBB691BC8FE7300E7269A /* AppDelegate.m */,
 				C4EFBB6B1BC8FE7300E7269A /* ViewController.h */,
 				C4EFBB6C1BC8FE7300E7269A /* ViewController.m */,
-				C4EFBB8A1BC8FE8000E7269A /* DXLocationManager.h */,
-				C4EFBB8B1BC8FE8000E7269A /* DXLocationManager.m */,
 				C4EFBB6E1BC8FE7300E7269A /* Main.storyboard */,
 				C4EFBB711BC8FE7300E7269A /* Images.xcassets */,
 				C4EFBB731BC8FE7300E7269A /* LaunchScreen.xib */,
@@ -176,7 +184,7 @@
 			files = (
 				C4EFBB6D1BC8FE7300E7269A /* ViewController.m in Sources */,
 				C4EFBB6A1BC8FE7300E7269A /* AppDelegate.m in Sources */,
-				C4EFBB8C1BC8FE8000E7269A /* DXLocationManager.m in Sources */,
+				C4BFBCB81BCF966400B2DE21 /* DXLocationManager.m in Sources */,
 				C4EFBB671BC8FE7300E7269A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
